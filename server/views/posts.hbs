@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Bootstrap links -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+            crossorigin="anonymous">
+
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+
+        {{!-- <script src="../scripts/login.js"></script> --}}
+
+        <!-- Styless -->
+        <!-- <link rel="stylesheet" href="./assets/css/portfolio.css">
+    <link rel="stylesheet" href="./assets/css/contact.css"> -->
+
+        <title>Posts</title>
+    </head>
+    <body>
+        <div class="container row">
+            <div class="col-4">
+                <div class="card" style="width: 18rem; margin: 10px;">
+                    <img
+                        src="https://w7.pngwing.com/pngs/247/564/png-transparent-computer-icons-user-profile-user-avatar-blue-heroes-electric-blue.png"
+                        class="card-img-top"
+                        alt="profile_image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{userInfo.name}}</h5>
+                        <h6 class="card-title">@{{userInfo.profile}}</h6>
+                        <p class="card-text">{{userInfo.headline}}</p>
+
+                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row">
+                    <button style="margin: 10px;" type="button"
+                        class="btn btn-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        data-bs-whatever="@mdo">Create
+                        POST</button>
+
+                    {{!-- <form action="/loggoffuser" method="post">
+                        <button type="submit"
+                            class="btn btn-danger" style="margin: 10px;">
+                            <i class="bi bi-power"></i>
+
+                        </button>
+                    </form> --}}
+                </div>
+
+                <div>
+                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5"
+                                        id="exampleModalLabel">New Post</h1>
+                                    <button type="button" class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                
+                                <div class="modal-body">
+                                    <form action="/addUserPost" method="post">
+                                        <div class="mb-3">
+                                            <input type="hidden" name="idUsers"
+                                                value={{userInfo.idUsers}}
+                                                class="form-control"
+                                                id="idUsers">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="message-text"
+                                                class="col-form-label">Message:</label>
+                                            <textarea class="form-control"
+                                                name="content"
+                                                id="content"></textarea>
+                                        </div>
+                                        <button type="button"
+                                            class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit"
+                                            class="btn btn-primary">Post</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-8" style="height: 700px; overflow: auto">
+                {{#each data}}
+                <div class="card m-2">
+                    <div class="card-header">
+                        Posts
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{content}}</p>
+                        <div style="display: flex; flex-direction: row;">
+                            <form action="/updateUserPostLikes" method="post">
+                                <input type="hidden" name="idPosts"
+                                    value="{{idPosts}}" />
+
+                                <button type="submit"
+                                    class="btn btn-primary position-relative">Likes&nbsp;<i
+                                        class="bi bi-hand-thumbs-up position-relative"></i>
+
+                                    <span
+                                        class="position-absolute top-0 start-100  translate-middle badge rounded-pill bg-success">
+                                        {{likes}}
+                                    </span>
+                                </button>
+                            </form>
+                            &nbsp;
+                            &nbsp;
+                            &nbsp;
+
+                            <form action="/updateUserPostShares" method="post">
+                                <input type="hidden" name="idPosts"
+                                    value="{{idPosts}}" />
+                                <button type="submit"
+                                    class="btn btn-secondary position-relative">Shares&nbsp;<i
+                                        class="bi bi-share"></i>
+                                    <span
+                                        class="position-absolute top-0 start-100  translate-middle badge rounded-pill bg-success">
+                                        {{shares}}
+                                    </span>
+                                </button>
+                            </form>
+                            &nbsp;
+                            &nbsp;
+                            &nbsp;
+
+                            <form action="/deleteUserPost" method="post">
+                                <input type="hidden" name="idPosts"
+                                    value="{{idPosts}}" />
+                                <button type="submit"
+                                    class="btn btn-danger">DELETE&nbsp;<i
+                                        class="bi bi-trash3"></i></button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+    </body>
+</html>
